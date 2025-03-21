@@ -1,8 +1,8 @@
 import { Utils } from "./utils/Utils";
-import * as express from "express";
-import * as mongoose from "mongoose";
-import * as bodyParser from "body-parser";
-import * as cors from "cors";
+import express from "express";
+import mongoose from "mongoose";
+import bodyParser from "body-parser";
+import cors from "cors";
 import { getEnvironmentVariables } from "./environments/environment";
 import UserRouter from "./routers/UserRouter";
 import BannerRouter from "./routers/BannerRouter";
