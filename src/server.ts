@@ -49,12 +49,8 @@ export class Server {
   }
 
   configureBodyParser() {
-    this.app.use(
-      bodyParser.urlencoded({
-        extended: true,
-      })
-    );
-    // this.app.use(bodyParser.json());
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: true }));
   }
 
   allowCors() {

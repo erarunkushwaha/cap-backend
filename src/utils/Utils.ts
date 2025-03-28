@@ -47,21 +47,28 @@ export class Utils {
     });
   }
 
-  static comparePassword(data: {
+  static async comparePassword(data: {
     password: string;
     encrypt_password: string;
-  }): Promise<any> {
-    return new Promise((resolve, reject) => {
-      Bcrypt.compare(data.password, data.encrypt_password, (err, same) => {
-        if (err) {
-          reject(err);
-        } else if (!same) {
-          reject(new Error("User & Password Doesn't Match"));
-        } else {
-          resolve(true);
-        }
-      });
-    });
+  }): Promise<boolean> {
+    try {
+      console.log("Password:", data.password);
+      console.log("Encrypted Password:", data.encrypt_password);
+
+      // Check if the values are valid
+      if (!data.password || !data.encrypt_password) {
+        throw new Error("Password or Encrypted password is missing");
+      }
+      const same = await Bcrypt.compare(data.password, data.encrypt_password);
+      if (!same) {
+        throw new Error("User & Password Doesn't Match");
+      }
+      return true;
+    } catch (err) {
+      throw new Error(
+        err.message || "Error occurred while comparing passwords"
+      );
+    }
   }
 
   static dotenvConfigs() {
